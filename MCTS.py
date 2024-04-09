@@ -9,7 +9,6 @@ import collections
 import math
 import gc
 from CubeModel import buildModel, compileModel
-from tensorflow.train import RMSPropOptimizer
 from tensorflow.keras.models import load_model
 import constants
 
