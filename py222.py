@@ -80,7 +80,7 @@ pieceDefs = np.array([ \
   [ 15, 22,  7], \
 ])
 
-pieceInds = np.zeros([58, 2], dtype=np.int)
+pieceInds = np.zeros([58, 2], dtype=int)
 pieceInds[50] = [0, 0]; pieceInds[54] = [0, 1]; pieceInds[13] = [0, 2]
 pieceInds[28] = [1, 0]; pieceInds[42] = [1, 1]; pieceInds[ 8] = [1, 2]
 pieceInds[14] = [2, 0]; pieceInds[21] = [2, 1]; pieceInds[ 4] = [2, 2]
@@ -89,7 +89,7 @@ pieceInds[47] = [4, 0]; pieceInds[30] = [4, 1]; pieceInds[40] = [4, 2]
 pieceInds[25] = [5, 0]; pieceInds[18] = [5, 1]; pieceInds[35] = [5, 2]
 pieceInds[23] = [6, 0]; pieceInds[57] = [6, 1]; pieceInds[37] = [6, 2]
 
-pieceCols = np.zeros([7, 3, 3], dtype=np.int)
+pieceCols = np.zeros([7, 3, 3], dtype=int)
 pieceCols[0, 0, :] = [0, 5, 4]; pieceCols[0, 1, :] = [4, 0, 5]; pieceCols[0, 2, :] = [5, 4, 0]
 pieceCols[1, 0, :] = [0, 4, 2]; pieceCols[1, 1, :] = [2, 0, 4]; pieceCols[1, 2, :] = [4, 2, 0]
 pieceCols[2, 0, :] = [0, 2, 1]; pieceCols[2, 1, :] = [1, 0, 2]; pieceCols[2, 2, :] = [2, 1, 0]
@@ -176,13 +176,30 @@ def isSolved(s, convert=False):
 
 # normalize stickers relative to a fixed DLB corner
 def normFC(s):
-  normCols = np.zeros(6, dtype=np.int)
-  normCols[s[18] - 3] = 1
-  normCols[s[23] - 3] = 2
-  normCols[s[14]] = 3
-  normCols[s[18]] = 4
-  normCols[s[23]] = 5
-  return normCols[s]
+    # Define the stickers of the DLB corner
+    dlb_stickers = [s[12], s[13], s[14], s[15]]
+
+    # Find the index of the minimum value among the DLB stickers
+    dlb_min_index = dlb_stickers.index(min(dlb_stickers))
+
+    # Determine the color of the facelet on the U face (opposite to DLB)
+    u_color = (dlb_min_index + 2) % 4
+
+    # Define a mapping for normalizing stickers
+    norm_mapping = {dlb_stickers[dlb_min_index]: 1,
+                    dlb_stickers[(dlb_min_index + 1) % 4]: 2,
+                    dlb_stickers[(dlb_min_index + 2) % 4]: 3,
+                    dlb_stickers[(dlb_min_index + 3) % 4]: 4}
+
+    # Normalize the stickers based on the mapping
+    norm_stickers = [norm_mapping.get(sticker, 0) for sticker in s]
+
+    # Set the U face stickers to the determined U color
+    for i in range(8, 12):
+        norm_stickers[i] = u_color
+
+    return norm_stickers
+
 
 # get OP representation given FC-normalized sticker representation
 def getOP(s):
