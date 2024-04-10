@@ -1,7 +1,7 @@
 kLearningRate = 0.0005
 kNumStickers = 24
 kNumCubes = 8
-kModelPath = "./model.cpkt.h5"
+kModelPath = "./model.cpkt"
 
 kMCTSExploration = 4 #this is form alphago, can't dispute it
 kDiscountFactor = 1.0
