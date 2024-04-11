@@ -24,3 +24,7 @@ if result:
 else:
     print("Cube not solved within the maximum number of moves.")
 
+# Display the solved cube
+print("Solved Cube:")
+py222.printCube(py222.getNumerical(scrambledCube))
+
