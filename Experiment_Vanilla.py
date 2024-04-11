@@ -14,6 +14,7 @@ model = load_model(model_path)
 scrambleDepth = 3  # Depth of cube scrambling
 maxMoves = 100     # Maximum number of moves allowed for solving
 num_trials = 100    # Number of trials to run
+maxDepth = 10       # Adjust as needed
 
 # Lists to store results
 success_list = []
@@ -26,7 +27,7 @@ for i in range(num_trials):
     scrambledCube = py222.createScrambledCube(scrambleDepth)
 
     # Solve the scrambled cube using the vanilla MCTS algorithm
-    result, numMoves, _ = MCTS.solveSingleCubeVanillaMCTS(model, scrambledCube, maxMoves)
+    result, numMoves, _ = MCTS.solveSingleCubeVanillaMCTS(model, scrambledCube, maxMoves, maxDepth)
 
     # Append results to the lists
     success_list.append(result)
