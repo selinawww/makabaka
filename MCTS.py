@@ -21,14 +21,14 @@ def solveSingleCubeGreedy(model, cube, maxMoves):
     numMovesTaken = 0
     while numMovesTaken <= maxMoves:
         if py222.isSolved(cube, convert=True):
-            return True, numMovesTaken
+            return True, numMovesTaken, cube
         state = np.array([py222.getState(cube).flatten()])
         _, policies = model.predict(state)
         policiesArray = policies[0]
         bestMove = policiesArray.argmax()
         cube = py222.doAlgStr(cube, moves[bestMove])
         numMovesTaken += 1
-    return False, maxMoves+1
+    return False, maxMoves+1, cube
 
 def solveSingleCubeVanillaMCTS(model, cube, maxMoves, maxDepth):
     numMovesTaken = 0
