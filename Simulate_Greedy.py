@@ -2,7 +2,7 @@
 from tensorflow.keras.models import load_model  # To load the trained model
 import constants
 import py222
-from MCTS
+import MCTS
 
 # Load the trained model using the correct filename
 model_path = "{}.h5".format(constants.kModelPath)
