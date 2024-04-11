@@ -9,14 +9,18 @@ model_path = "{}.h5".format(constants.kModelPath)
 model = load_model(model_path)
 
 # Set parameters for the cube solving
-scrambleDepth = 10  # Depth of cube scrambling
-maxMoves = 100      # Maximum number of moves allowed for solving
+scrambleDepth = 2  # Depth of cube scrambling
+maxMoves = 100     # Maximum number of moves allowed for solving
 
 # Create a scrambled cube with the specified depth
 scrambledCube = py222.createScrambledCube(scrambleDepth)
 
+# Display the initial cube
+print("Initial Cube:")
+py222.printCube(py222.getNumerical(scrambledCube))
+
 # Solve the scrambled cube using the greedy algorithm
-result, numMoves = MCTS.solveSingleCubeGreedy(model, scrambledCube, maxMoves)
+result, numMoves, scrambledCube = MCTS.solveSingleCubeGreedy(model, scrambledCube, maxMoves)
 
 # Check if the cube was solved within the maximum number of moves
 if result:
@@ -24,7 +28,7 @@ if result:
 else:
     print("Cube not solved within the maximum number of moves.")
 
+
 # Display the solved cube
 print("Solved Cube:")
 py222.printCube(py222.getNumerical(scrambledCube))
-
