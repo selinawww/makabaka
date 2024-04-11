@@ -17,7 +17,7 @@ maxDepth = 10       # Adjust as needed
 scrambledCube = py222.createScrambledCube(scrambleDepth)
 
 # Solve the cube using the vanilla MCTS algorithm
-result, numMoves = MCTS.solveSingleCubeVanillaMCTS(model, scrambledCube, maxMoves, maxDepth)
+result, numMoves, scrambledCube = MCTS.solveSingleCubeVanillaMCTS(model, scrambledCube, maxMoves, maxDepth)
 
 # Check if the cube was solved
 if result:
