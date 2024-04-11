@@ -36,14 +36,14 @@ def solveSingleCubeVanillaMCTS(model, cube, maxMoves, maxDepth):
     counts = {}
     while numMovesTaken <= maxMoves:
         if py222.isSolved(cube, convert=True):
-            return True, numMovesTaken
+            return True, numMovesTaken, cube
         bestMove = selectActionVanillaMCTS(model, cube, maxDepth, q, counts)
         if bestMove == -1:
             print("something went wrong when selecting best move")
             break
         cube = py222.doAlgStr(cube, moves[bestMove])
         numMovesTaken += 1
-    return False, maxMoves+1
+    return False, maxMoves+1, cube
 
 def selectActionVanillaMCTS(model, state, depth, q, counts):
     stateStr = str(state)
