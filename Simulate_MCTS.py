@@ -20,7 +20,11 @@ print("Initial Cube:")
 py222.printCube(py222.getNumerical(scrambledCube))
 
 # Solve the cube using the vanilla MCTS algorithm
-result, numMoves, path, scrambledCube = MCTS.solveSingleCubeFullMCTS(model, scrambledCube, maxMoves)
+result, numMoves, path = MCTS.solveSingleCubeFullMCTS(model, scrambledCube, maxMoves)
+
+# Update the scrambled cube using the path
+for move in path:
+    scrambledCube = py222.doAlgStr(scrambledCube, move)
 
 # Check if the cube was solved
 if result:
