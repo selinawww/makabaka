@@ -3,14 +3,34 @@ from tensorflow.keras.models import load_model  # To load the trained model
 import constants
 import py222
 import MCTS
+import numpy as np
+
+
+
+# Define the findMove function
+def findMove(prev_state, curr_state):
+    # Define a list of possible moves
+    moves = ['F', 'F\'', 'B', 'B\'', 'R', 'R\'', 'L', 'L\'', 'D', 'D\'', 'U', 'U\'']
+
+    # Loop through each move
+    for move in moves:
+        # Apply the move to the previous state
+        next_state = py222.doAlgStr(prev_state, move)
+
+        # If the next state matches the current state, return the move
+        if np.array_equal(next_state, curr_state):
+            return move
+
+    # If no move matches the transition, return None
+    return None
 
 # Load the trained model using the correct filename
 model_path = "{}.h5".format(constants.kModelPath)
 model = load_model(model_path)
 
 # Set the parameters
-scrambleDepth = 3  # Adjust as needed
-maxMoves = 100      # Adjust as needed
+scrambleDepth = 2  # Adjust as needed
+maxMoves = 1000      # Adjust as needed
 
 # Create a scrambled cube
 scrambledCube = py222.createScrambledCube(scrambleDepth)
@@ -19,11 +39,14 @@ scrambledCube = py222.createScrambledCube(scrambleDepth)
 print("Initial Cube:")
 py222.printCube(py222.getNumerical(scrambledCube))
 
-# Solve the cube using the vanilla MCTS algorithm
+# Solve the cube using the MCTS algorithm
 result, numMoves, path = MCTS.solveSingleCubeFullMCTS(model, scrambledCube, maxMoves)
 
-# Update the scrambled cube using the path
-for move in path:
+# Apply each move in the path to the scrambledCube
+for i in range(1, len(path)):
+    prev_state = path[i - 1]
+    curr_state = path[i]
+    move = findMove(prev_state, curr_state)
     scrambledCube = py222.doAlgStr(scrambledCube, move)
 
 # Check if the cube was solved
