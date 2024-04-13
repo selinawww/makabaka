@@ -169,7 +169,7 @@ def solveSingleCubeFullMCTS(model, cube, maxMoves):
             currentCubeStr = str(currentCube)
             simulatedPath.append(currentCube)
             numMovesTaken += 1
-    return False, maxMoves+1, simulatedPath
+    return False, maxMoves+1, simulatedPath, cube
 
 def initStateVals(stateStr, counts, maxVals, priorProbabilities, virtualLosses, probs):
     counts[stateStr] = {}
