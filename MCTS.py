@@ -130,7 +130,7 @@ def solveSingleCubeFullMCTS(model, cube, maxMoves):
     simulatedPath.append(currentCube)
     while numMovesTaken <= maxMoves:
         if py222.isSolved(currentCube, convert=True):
-            return True, numMovesTaken, simulatedPath, cube
+            return True, numMovesTaken, simulatedPath
         if currentCubeStr not in treeStates:
             for move in moves:
                 childState = py222.doAlgStr(currentCube, move)
@@ -169,7 +169,7 @@ def solveSingleCubeFullMCTS(model, cube, maxMoves):
             currentCubeStr = str(currentCube)
             simulatedPath.append(currentCube)
             numMovesTaken += 1
-    return False, maxMoves+1, simulatedPath, cube
+    return False, maxMoves+1, simulatedPath
 
 def initStateVals(stateStr, counts, maxVals, priorProbabilities, virtualLosses, probs):
     counts[stateStr] = {}
