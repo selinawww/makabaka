@@ -1,9 +1,8 @@
 # RubiksSolver
 
-This is a final project for the CS238 class at Stanford University. 
+This is a final project for the COMP579 clas at McGill university.
 
-Contributions by Robert Matthew Jinwei Jones, Jessica Lauren Guo and Nick Bomwan.
+Contributions by Yuyan Lin and Selina Wang.
 
-The code in this repository implements deep reinforcement learning approaches for solving a Rubik's Cube without Human Knowledge as outlined in this paper:
-
+Original inspiration of paper:
 https://arxiv.org/abs/1805.07470

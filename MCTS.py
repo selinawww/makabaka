@@ -14,6 +14,7 @@ import constants
 
 moves = ['F', 'F\'', 'B', 'B\'', 'R', 'R\'', 'L', 'L\'', 'D', 'D\'', 'U', 'U\'']
 
+
 def reward(cube):
     return 1 if py222.isSolved(cube, True) else -1
 
