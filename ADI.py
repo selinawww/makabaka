@@ -1,4 +1,4 @@
-import py222
+import CubeLib
 from random import randint
 import numpy as np
 import tensorflow as tf

@@ -1,7 +1,7 @@
 # Import necessary libraries
 from tensorflow.keras.models import load_model  # To load the trained model
 import constants
-import py222
+import CubeLib
 import MCTS
 import numpy as np
 

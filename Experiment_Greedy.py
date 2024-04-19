@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt  # Importing matplotlib for plotting
 from tensorflow.keras.models import load_model  # To load the trained model
 import constants
-import py222
+import CubeLib
 import MCTS
 
 # Set matplotlib to display plots inline
